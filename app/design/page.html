@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature-Inspired File Storage App Palette</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #87CEEB 0%, #20B2AA 50%, #00CED1 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00CED1, #50C878, #32CD32);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(to bottom, #32CD32, #50C878);
+            border-radius: 2px;
+            margin-right: 12px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-name {
+            font-weight: 600;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .color-value {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 0.2rem 0.2rem 0.2rem 0;
+        }
+
+        .gradient-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-card {
+            height: 120px;
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gradient-card:hover::after {
+            opacity: 1;
+        }
+
+        .ui-examples {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .ui-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Primary Colors */
+        .sky-blue { background: #87CEEB; }
+        .cyan-bright { background: #00CED1; }
+        .teal-deep { background: #20B2AA; }
+        .emerald { background: #50C878; }
+        .lime-bright { background: #32CD32; }
+        .lime-soft { background: #9ACD32; }
+        .white-soft { background: #F8FFFE; }
+        .white-translucent { background: rgba(255, 255, 255, 0.8); }
+
+        /* Gradients */
+        .gradient-sky-teal { background: linear-gradient(135deg, #87CEEB 0%, #20B2AA 100%); }
+        .gradient-cyan-emerald { background: linear-gradient(135deg, #00CED1 0%, #50C878 100%); }
+        .gradient-teal-lime { background: linear-gradient(135deg, #20B2AA 0%, #32CD32 100%); }
+        .gradient-emerald-lime { background: linear-gradient(135deg, #50C878 0%, #9ACD32 100%); }
+
+        /* UI Component Styles */
+        .btn-primary { background: linear-gradient(135deg, #00CED1, #50C878); color: white; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.9); color: #20B2AA; }
+        .btn-success { background: linear-gradient(135deg, #50C878, #32CD32); color: white; }
+
+        .file-folder { background: linear-gradient(135deg, #00CED1, #20B2AA); }
+        .file-image { background: linear-gradient(135deg, #50C878, #9ACD32); }
+        .file-document { background: linear-gradient(135deg, #87CEEB, #00CED1); }
+
+        .usage-notes {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #32CD32;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .usage-notes h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .usage-notes ul {
+            color: rgba(255, 255, 255, 0.9);
+            padding-left: 1.5rem;
+        }
+
+        .usage-notes li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CloudForest</h1>
+        <p class="subtitle">Nature-Inspired File Storage UI Palette</p>
+
+        <div class="section">
+            <h2 class="section-title">Primary Colors</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch sky-blue"></div>
+                    <div class="color-name">Sky Blue</div>
+                    <div class="color-value">#87CEEB</div>
+                    <div class="color-value">rgb(135, 206, 235)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch cyan-bright"></div>
+                    <div class="color-name">Cyan Bright</div>
+                    <div class="color-value">#00CED1</div>
+                    <div class="color-value">rgb(0, 206, 209)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch teal-deep"></div>
+                    <div class="color-name">Teal Deep</div>
+                    <div class="color-value">#20B2AA</div>
+                    <div class="color-value">rgb(32, 178, 170)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch emerald"></div>
+                    <div class="color-name">Emerald</div>
+                    <div class="color-value">#50C878</div>
+                    <div class="color-value">rgb(80, 200, 120)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch lime-bright"></div>
+                    <div class="color-name">Lime Bright</div>
+                    <div class="color-value">#32CD32</div>
+                    <div class="color-value">rgb(50, 205, 50)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch lime-soft"></div>
+                    <div class="color-name">Lime Soft</div>
+                    <div class="color-value">#9ACD32</div>
+                    <div class="color-value">rgb(154, 205, 50)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch white-soft"></div>
+                    <div class="color-name">Soft White</div>
+                    <div class="color-value">#F8FFFE</div>
+                    <div class="color-value">rgb(248, 255, 254)</div>
+                </div>
+                <div class="color-card">
+                    <div class="color-swatch white-translucent"></div>
+                    <div class="color-name">Translucent White</div>
+                    <div class="color-value">rgba(255,255,255,0.8)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Gradient Combinations</h2>
+            <div class="gradient-showcase">
+                <div class="gradient-card gradient-sky-teal">
+                    <div>
+                        <div style="font-weight: 600;">Sky to Teal</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Primary brand gradient</div>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.8rem;">linear-gradient(135deg, #87CEEB, #20B2AA)</div>
+                </div>
+                <div class="gradient-card gradient-cyan-emerald">
+                    <div>
+                        <div style="font-weight: 600;">Cyan to Emerald</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Action buttons</div>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.8rem;">linear-gradient(135deg, #00CED1, #50C878)</div>
+                </div>
+                <div class="gradient-card gradient-teal-lime">
+                    <div>
+                        <div style="font-weight: 600;">Teal to Lime</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Success states</div>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.8rem;">linear-gradient(135deg, #20B2AA, #32CD32)</div>
+                </div>
+                <div class="gradient-card gradient-emerald-lime">
+                    <div>
+                        <div style="font-weight: 600;">Emerald to Lime</div>
+                        <div style="font-size: 0.9rem; opacity: 0.9;">Growth indicators</div>
+                    </div>
+                    <div style="font-family: monospace; font-size: 0.8rem;">linear-gradient(135deg, #50C878, #9ACD32)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">UI Component Examples</h2>
+            <div class="ui-examples">
+                <div class="ui-card">
+                    <h3 style="color: #20B2AA; margin-bottom: 1rem;">File Types</h3>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="file-icon file-folder">📁</div>
+                        <div class="file-icon file-image">🖼️</div>
+                        <div class="file-icon file-document">📄</div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">Different gradients for file type identification</p>
+                </div>
+
+                <div class="ui-card">
+                    <h3 style="color: #20B2AA; margin-bottom: 1rem;">Action Buttons</h3>
+                    <button class="btn btn-primary">Upload Files</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-success">Complete</button>
+                </div>
+
+                <div class="ui-card">
+                    <h3 style="color: #20B2AA; margin-bottom: 1rem;">Storage Progress</h3>
+                    <div style="background: #f0f0f0; border-radius: 8px; height: 8px; margin: 1rem 0;">
+                        <div style="background: linear-gradient(90deg, #00CED1, #50C878); width: 65%; height: 100%; border-radius: 8px;"></div>
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem;">6.5GB of 10GB used</p>
+                </div>
+
+                <div class="ui-card">
+                    <h3 style="color: #20B2AA; margin-bottom: 1rem;">Status Indicators</h3>
+                    <div style="margin: 0.5rem 0; display: flex; align-items: center;">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #32CD32; margin-right: 8px;"></div>
+                        <span style="color: #666; font-size: 0.9rem;">Synced</span>
+                    </div>
+                    <div style="margin: 0.5rem 0; display: flex; align-items: center;">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #9ACD32; margin-right: 8px;"></div>
+                        <span style="color: #666; font-size: 0.9rem;">Uploading</span>
+                    </div>
+                    <div style="margin: 0.5rem 0; display: flex; align-items: center;">
+                        <div style="width: 8px; height: 8px; border-radius: 50%; background: #00CED1; margin-right: 8px;"></div>
+                        <span style="color: #666; font-size: 0.9rem;">Processing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="usage-notes">
+            <h3>Usage Guidelines</h3>
+            <ul>
+                <li><strong>Primary Brand:</strong> Use sky blue to teal gradients for main navigation and headers</li>
+                <li><strong>Interactive Elements:</strong> Cyan to emerald for buttons and clickable components</li>
+                <li><strong>Success States:</strong> Emerald to lime for completed actions and positive feedback</li>
+                <li><strong>Backgrounds:</strong> Soft white and translucent overlays for content areas</li>
+                <li><strong>Accents:</strong> Bright lime for growth metrics, new features, and call-to-action elements</li>
+                <li><strong>Accessibility:</strong> Ensure sufficient contrast ratios, especially with translucent elements</li>
+                <li><strong>Consistency:</strong> Stick to 2-3 gradients per interface to maintain visual harmony</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
